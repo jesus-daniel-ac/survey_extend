@@ -1,0 +1,109 @@
+<odoo>
+  <data>
+    <template id="survey_fill_form_done_inherit_percent"
+                name="Survey Finished - Replace Title with Score"
+                inherit_id="survey.survey_fill_form_done">
+        <xpath expr="//div[contains(@class,'o_survey_finished')]//h1[contains(@class,'fs-2')]"
+            position="replace">
+        <h1 class="fs-2">
+            <t t-if="survey.scoring_type != 'no_scoring' and not survey.hide_percentage">
+            You scored <t t-out="answer.scoring_percentage"/>%
+            </t>
+            <t t-else="">Thank you!</t>
+        </h1>
+        </xpath> 
+    </template>
+
+    <template id="survey_layout_inherit" inherit_id="survey.layout">
+      <xpath expr="//head" position="inside">
+        <style type="text/css" id="survey_extend_custom_styles">
+          :root {
+              --survey-primary: #6A0DAD;
+              --survey-primary-light: rgba(106, 13, 173, 0.12);
+              --survey-primary-dark: #4B0B7A;
+          }
+          .o_survey_form .o_survey_question {
+              color: var(--survey-primary) !important;
+              font-weight: 600;
+          }
+          .o_survey_form .text-primary {
+              color: var(--survey-primary) !important;
+          }
+          .o_survey_form .btn-primary {
+              background-color: var(--survey-primary) !important;
+              border-color: var(--survey-primary) !important;
+              color: #fff !important;
+              font-weight: 600;
+          }
+          .o_survey_form .btn-primary:hover,
+          .o_survey_form .btn-primary:focus {
+              background-color: var(--survey-primary-dark) !important;
+              border-color: var(--survey-primary-dark) !important;
+              color: #fff !important;
+          }
+          .o_survey_form .o_survey_choice_btn {
+              background-color: var(--survey-primary-light) !important;
+              box-shadow: var(--survey-primary) 0px 0px 0px 1px !important;
+              color: var(--survey-primary) !important;
+          }
+          .o_survey_progress .progress-bar {
+              background-color: var(--survey-primary) !important;
+          }
+          .o_survey_form a {
+              color: var(--survey-primary) !important;
+          }
+          .o_survey_form a:hover {
+              color: var(--survey-primary-dark) !important;
+          }
+          .o_survey_form .o_survey_choice_btn.o_survey_selected {
+              background-color: var(--survey-primary) !important;
+              color: #fff !important;
+              box-shadow: var(--survey-primary) 0px 0px 0px 2px !important;
+          }
+          .o_survey_form .o_survey_choice_key {
+              width: 25px;
+              height: 25px;
+              border: 1px solid var(--survey-primary) !important;
+              background-color: var(--survey-primary-light);
+          }
+          .o_survey_form .o_survey_choice_btn.o_survey_selected {
+              background-color: var(--survey-primary-dark) !important;
+              color: #fff !important;
+              box-shadow: var(--survey-primary) 0px 0px 0px 2px !important;
+          }
+          .o_survey_form .o_survey_choice_key span.o_survey_key {
+              border: 1px solid var(--survey-primary) !important;
+          }
+          .o_survey_session_manage .o_survey_question_datetime,
+          .o_survey_session_manage .o_survey_question_numerical_box,
+          .o_survey_quick_access .o_survey_question_text_box,
+          .o_survey_quick_access .o_survey_question_date,
+          .o_survey_quick_access .o_survey_question_datetime,
+          .o_survey_quick_access .o_survey_question_numerical_box {
+              border: 0px;
+              border-bottom: 1px solid var(--survey-primary-dark) !important;
+          }
+          .o_survey_form .o_survey_question_text_box,
+          .o_survey_form .o_survey_question_date,
+          .o_survey_form .o_survey_question_datetime,
+          .o_survey_form .o_survey_question_numerical_box,
+          .o_survey_print .o_survey_question_text_box,
+          .o_survey_print .o_survey_question_date,
+          .o_survey_print .o_survey_question_datetime,
+          .o_survey_print .o_survey_question_numerical_box,
+          .o_survey_session_manage .o_survey_question_text_box,
+          .o_survey_session_manage .o_survey_question_date,
+          .o_survey_session_manage .o_survey_question_datetime,
+          .o_survey_session_manage .o_survey_question_numerical_box,
+          .o_survey_quick_access .o_survey_question_text_box,
+          .o_survey_quick_access .o_survey_question_date,
+          .o_survey_quick_access .o_survey_question_datetime,
+          .o_survey_quick_access .o_survey_question_numerical_box {
+              border: 0px;
+              border-bottom: 1px solid var(--survey-primary) !important;
+          }
+        </style>
+      </xpath>
+    </template>
+  </data>
+</odoo>

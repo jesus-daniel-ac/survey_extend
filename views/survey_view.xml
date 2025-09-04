@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+
+    <record id="action_psychologist_surveys" model="ir.actions.act_window">
+      <field name="name">Encuestas</field>
+      <field name="res_model">survey.survey</field>
+      <field name="view_mode">kanban,list,form,activity</field>
+      <!-- Filtra a encuestas psicológicas y asignadas al usuario -->
+      <field name="domain">['&amp;', ('is_psychologist_survey','=',True), '|', ('psychologist_ids','in',[uid]), ('restrict_user_ids','in',[uid])]</field>
+    </record>
+
+  <menuitem id="menu_psychologist_surveys"
+            name="Encuestas"
+            parent="survey.menu_surveys"
+            action="action_psychologist_surveys"
+            groups="survey_extend.group_survey_psychologist,survey.group_survey_user,base.group_system"
+            sequence="40"/>
+
+
+        <record id="survey_survey_view_form_inherit_extend" model="ir.ui.view">
+          <field name="name">survey.survey.form.inherit.extend</field>
+          <field name="model">survey.survey</field>
+          <field name="inherit_id" ref="survey.survey_survey_view_form"/>
+          <field name="arch" type="xml">
+            <xpath expr="//page[@name='options']//field[@name='scoring_success_min']" position="after">
+              <field name="color" widget="color_picker"/>
+              <field name="hide_percentage"/>
+              <field name="is_psychologist_survey"/>
+            </xpath>
+
+             <xpath expr="//field[@name='restrict_user_ids']" position="before">
+                  <field name="psychologist_ids" widget="many2many_tags" invisible="not is_psychologist_survey"/>
+            </xpath>
+
+          </field>
+        </record>
+
+        
+    </data>
+</odoo>

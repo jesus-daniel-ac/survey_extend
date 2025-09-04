@@ -1,0 +1,11 @@
+<odoo>
+    <record id="action_report_psychological_aptitude" model="ir.actions.report">
+        <field name="name">Reporte Apto Psicológico</field>
+        <field name="model">survey.user_input</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">survey_extend.report_psychological_aptitude_document</field>
+        <field name="report_file">survey_extend.report_psychological_aptitude_document</field>
+        <field name="binding_model_id" ref="survey.model_survey_user_input"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Tree view -->
+    <record id="view_survey_user_input_tree_inherit_psychologist" model="ir.ui.view">
+        <field name="name">survey.user_input.tree.inherit.psychologist</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='survey_id']" position="after">
+                <field name="psychologist_user_id"/>
+            </xpath>
+             <xpath expr="//field[@name='survey_id']" position="after">
+                <field name="candidate_name" optional="show"/>
+            </xpath>
+            <xpath expr="//field[@name='scoring_success']" position="after">
+                <field name="points_assit" optional="show"/>
+                <field name="points_ders" optional="show"/>
+                <field name="points_plutchik" optional="show"/>
+            </xpath>
+            <xpath expr="//field[@name='scoring_percentage']" position="attributes">
+                <attribute name="column_invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="view_survey_user_input_form_inherit_psychologist" model="ir.ui.view">
+        <field name="name">survey.user_input.form.inherit.psychologist</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook" position="inside">
+                <page string="Evaluación Psicológica"  invisible="not is_psychologist_survey">
+                    <group>
+                        <group string="Candidato">
+                            <field name="business_unit_id" groups="survey_extend.group_survey_psychologist"/>
+                            <field name="candidate_name" groups="survey_extend.group_survey_psychologist"/>
+                            <field name="candidate_age" groups="survey_extend.group_survey_psychologist"/>
+                        </group>
+                        <group string="Psicólogo evaluador">
+                            <field name="psychologist_user_id" groups="survey_extend.group_survey_psychologist"/>
+                            <field name="psychologist_license" groups="survey_extend.group_survey_psychologist"/>
+                            <field name="psychologist_signature" groups="survey_extend.group_survey_psychologist" widget="signature"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Puntaje">
+                            <field name="points_assit" groups="survey_extend.group_survey_psychologist" readonly="1"/>
+                            <field name="points_ders" groups="survey_extend.group_survey_psychologist" readonly="1"/>
+                            <field name="points_plutchik" groups="survey_extend.group_survey_psychologist" readonly="1"/>
+                        </group>
+                        <group string="Resultados">
+                            <field name="risk_substance_use" groups="survey_extend.group_survey_psychologist"/>
+                            <field name="emotional_stability_summary" groups="survey_extend.group_survey_psychologist"/>
+                            <field name="evaluation_final_result" groups="survey_extend.group_survey_psychologist"/>
+                            <field name="recommendations" groups="survey_extend.group_survey_psychologist"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+            <xpath expr="//field[@name='state']" position="after">
+                <button name="action_print_psychological_report"
+                        string="Reporte Apto Psicológico"
+                        type="object"
+                        class="oe_highlight"/>
+            </xpath>
+
+
+
+        </field>
+    </record>
+
+    
+
+</odoo>

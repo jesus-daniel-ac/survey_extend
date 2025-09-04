@@ -1,0 +1,17 @@
+<odoo>
+  <data noupdate="0">
+    <record id="group_survey_psychologist" model="res.groups">
+      <field name="name">Psicólogo</field>
+      <field name="category_id" ref="base.module_category_marketing_surveys"/>
+    </record>
+
+    <!-- <record id="survey.group_survey_user" model="res.groups">
+      <field name="implied_ids" eval="[(4, ref('survey_extend.group_survey_psychologist'))]"/>
+    </record>
+
+    <record id="base.group_system" model="res.groups">
+      <field name="implied_ids" eval="[(4, ref('survey_extend.group_survey_psychologist'))]"/>
+    </record> -->
+
+  </data>
+</odoo>
