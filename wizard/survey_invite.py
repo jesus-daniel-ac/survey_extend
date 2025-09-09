@@ -22,6 +22,12 @@ class SurveyInvite(models.TransientModel):
         string="Compañías Permitidas"
     )
 
+    is_psychologist_survey = fields.Boolean(
+        related="survey_id.is_psychologist_survey",
+        store=True
+    )
+
+
     @api.depends("psychologist_user_id")
     def _compute_allowed_company_ids(self):
         for record in self:
@@ -34,15 +40,16 @@ class SurveyInvite(models.TransientModel):
     @api.onchange('psychologist_user_id', 'company_id', 'survey_id')
     def _onchange_psychologist_user_id(self):
         for w in self:
-            # limpiar siempre
-            w.survey_start_url = False
+            if w.is_psychologist_survey:
+                # limpiar siempre
+                w.survey_start_url = False
 
-            if (
-                w.survey_id
-                and getattr(w.survey_id, 'is_psychologist_survey', False)
-                and w.psychologist_user_id
-                and w.company_id
-            ):
-                base = w.survey_id.get_base_url()
-                path = f"/survey/start/{w.psychologist_user_id.id}/{w.company_id.id}/{w.survey_id.access_token}"
-                w.survey_start_url = werkzeug.urls.url_join(base, path.lstrip('/'))
+                if (
+                    w.survey_id
+                    and getattr(w.survey_id, 'is_psychologist_survey', False)
+                    and w.psychologist_user_id
+                    and w.company_id
+                ):
+                    base = w.survey_id.get_base_url()
+                    path = f"/survey/start/{w.psychologist_user_id.id}/{w.company_id.id}/{w.survey_id.access_token}"
+                    w.survey_start_url = werkzeug.urls.url_join(base, path.lstrip('/'))

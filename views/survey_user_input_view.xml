@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Tree view -->
-    <record id="view_survey_user_input_tree_inherit_psychologist" model="ir.ui.view">
-        <field name="name">survey.user_input.tree.inherit.psychologist</field>
+
+    <record id="survey_user_input_view_tree_psychologist" model="ir.ui.view">
+        <field name="name">survey.user_input.view.tree.psychologist</field>
         <field name="model">survey.user_input</field>
-        <field name="inherit_id" ref="survey.survey_user_input_view_tree"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='survey_id']" position="after">
+            <list string="Survey User inputs (Psychologist)" create="false">
+                <field name="create_date"/>
+                <field name="survey_id"/>
                 <field name="psychologist_user_id"/>
-            </xpath>
-             <xpath expr="//field[@name='survey_id']" position="after">
-                <field name="candidate_name" optional="show"/>
-            </xpath>
-            <xpath expr="//field[@name='scoring_success']" position="after">
+                <field name="candidate_name"/>
+                <field name="partner_id" optional="show"/>
+                <field name="email" optional="show"/>
+                <field name="attempts_number"/>
+                <field name="deadline"/>
+                <field name="test_entry" column_invisible="True"/>
                 <field name="points_assit" optional="show"/>
                 <field name="points_ders" optional="show"/>
                 <field name="points_plutchik" optional="show"/>
-            </xpath>
-            <xpath expr="//field[@name='scoring_percentage']" position="attributes">
-                <attribute name="column_invisible">True</attribute>
-            </xpath>
+                <field name="state" widget="badge"
+                    decoration-success="state == 'done'"
+                    decoration-info="state == 'new'"
+                    decoration-warning="state == 'in_progress'"/>
+            </list>
         </field>
     </record>
+
+    <record model="ir.actions.act_window" id="action_survey_user_input_psychologist">
+        <field name="name">Participaciones</field>
+        <field name="res_model">survey.user_input</field>
+        <field name="domain">[('survey_id.is_psychologist_survey','=',True)]</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="survey_user_input_view_tree_psychologist"/>
+        <field name="context">{'search_default_survey_id': active_id, 'search_default_completed': 1}</field>
+    </record>
+
 
     <!-- Form view -->
     <record id="view_survey_user_input_form_inherit_psychologist" model="ir.ui.view">
@@ -70,6 +83,8 @@
 
         </field>
     </record>
+
+
 
     
 

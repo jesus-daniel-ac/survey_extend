@@ -1,5 +1,54 @@
 <odoo>
   <data>
+    <template id="survey_fill_form_done_inherit_hide_result_block"
+            name="Survey Finished - Hide Result Block"
+            inherit_id="survey.survey_fill_form_done">
+        <xpath expr="//div[@class='col']" position="replace">
+            <div class="col" t-if="not survey.hide_result_block">
+                <t t-if="survey.scoring_type != 'no_scoring' and survey.scoring_success_min">
+                    <t t-if="answer.scoring_success">
+                        <div>Congratulations, you have passed the test!</div>
+                        <div t-if="survey.certification" class="mt16 mb16">
+                            <a role="button" class="btn btn-primary btn-lg" t-att-href="'/survey/%s/get_certification' % survey.id">
+                                <i class="fa fa-fw fa-trophy" role="img" aria-label="Download certification" title="Download certification"/>
+                                Download certification
+                            </a>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div>Unfortunately, you have failed the test.</div>
+                    </t>
+                </t>
+                <div class="d-flex gap-3 mt-3">
+                    <t t-call="survey.survey_button_retake"/>
+                    <p t-if="survey.scoring_type != 'scoring_without_answers'">
+                        <a role="button" class="o_survey_review btn btn-secondary btn-lg" t-att-href="'/survey/print/%s?answer_token=%s&amp;review=True' % (survey.access_token, answer.access_token)">
+                            Review your answers
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="survey_fill_form_done_inherit_hide_answers"
+          name="Survey Finished - Hide Answers Button"
+          inherit_id="survey.survey_fill_form_done">
+        <xpath expr="//div[contains(@class,'o_survey_finished')]//div[@class='d-flex gap-3 mt-3']" position="replace">
+            <div class="d-flex gap-3 mt-3" t-if="not survey.hide_answers">
+                <t t-call="survey.survey_button_retake"/>
+                <p t-if="survey.scoring_type != 'scoring_without_answers'">
+                    <a role="button"
+                    class="o_survey_review btn btn-secondary btn-lg"
+                    t-att-href="'/survey/print/%s?answer_token=%s&amp;review=True' % (survey.access_token, answer.access_token)">
+                    Review your answers
+                    </a>
+                </p>
+            </div>
+        </xpath>
+    </template>
+
+
     <template id="survey_fill_form_done_inherit_percent"
                 name="Survey Finished - Replace Title with Score"
                 inherit_id="survey.survey_fill_form_done">

@@ -10,10 +10,17 @@ class SurveySurvey(models.Model):
         string="Color",
         help="Index of the color (used with Odoo's predefined color list)."
     )
-
+    hide_answers = fields.Boolean(
+        string="No mostrar respuestas",
+        help="Si está activado, las respuestas no se mostrarán al finalizar la encuesta."
+    )
     hide_percentage = fields.Boolean(
         string='No mostrar porcentaje',
         help='Activa esta opción para ocultar el porcentaje de respuestas al finalizar la encuesta.'
+    )
+    hide_result_block = fields.Boolean(
+        string="Ocultar bloque de resultados",
+        help="Si está activado, se ocultará el bloque de felicitación/aprobación, certificado y botones."
     )
     is_psychologist_survey = fields.Boolean(
         string='Encuesta de psicólogo',
@@ -33,6 +40,27 @@ class SurveySurvey(models.Model):
         if self.is_psychologist_survey and self.env.context.get("psychologist_user_id"):
             values["psychologist_user_id"] = self.env.context["psychologist_user_id"]
         return super()._create_answer(**values)
+
+
+    def action_survey_user_input_completed(self):
+        self.ensure_one()
+        if self.is_psychologist_survey:
+            action = self.env["ir.actions.act_window"]._for_xml_id(
+                "survey_extend.action_survey_user_input_psychologist"
+            )
+        else:
+            action = self.env["ir.actions.act_window"]._for_xml_id(
+                "survey.action_survey_user_input"
+            )
+
+        ctx = dict(self.env.context)
+        ctx.update({
+            "search_default_survey_id": self.id,
+            "search_default_completed": 1,
+        })
+        action["context"] = ctx
+        return action
+
 
 
 class SurveyInvite(models.TransientModel):

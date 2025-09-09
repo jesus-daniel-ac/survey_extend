@@ -23,12 +23,12 @@
           <field name="inherit_id" ref="survey.survey_survey_view_form"/>
           <field name="arch" type="xml">
             <xpath expr="//page[@name='options']//field[@name='scoring_success_min']" position="after">
-              <field name="color" widget="color_picker"/>
-              <field name="hide_percentage"/>
-              <field name="is_psychologist_survey"/>
+                <!-- <field name="color" widget="color_picker"/> -->
+                <field name="hide_percentage"/>
+                <field name="is_psychologist_survey"/>
+                <field name="hide_result_block"/>
             </xpath>
-
-             <xpath expr="//field[@name='restrict_user_ids']" position="before">
+            <xpath expr="//field[@name='restrict_user_ids']" position="before">
                   <field name="psychologist_ids" widget="many2many_tags" invisible="not is_psychologist_survey"/>
             </xpath>
 
