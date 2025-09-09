@@ -61,7 +61,7 @@
                 Concluyendo que el candidato es <span class="apto-bold">APTO</span> para desempeñar las actividades del puesto de acuerdo con las impresiones clínicas.
               </t>
               <t t-elif="doc.evaluation_final_result and doc.evaluation_final_result == 'no_apto'">
-                Concluyendo que el candidato es <span class="apto-bold">NO APTO</span> para desempeñar las actividades del puesto de acuerdo con las impresiones clínicas.
+                Concluyendo que el candidato <span class="apto-bold">NO ES APTO</span> para desempeñar las actividades del puesto de acuerdo con las impresiones clínicas.
               </t>
             </div>
 
