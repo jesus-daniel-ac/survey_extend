@@ -3,3 +3,6 @@ access_survey_user_input_psychologist,survey.user_input.psychologist,model_surve
 access_survey_psychologist,survey.survey.psychologist,model_survey_survey,survey_extend.group_survey_psychologist,1,0,0,0
 access_survey_invite_psychologist,survey.invite.psychologist,model_survey_invite,survey_extend.group_survey_psychologist,1,1,1,0
 access_survey_question_answer,survey.question.answer,survey.model_survey_question_answer,survey_extend.group_survey_psychologist,1,0,0,0
+access_survey_question_psychologist,survey.question.psychologist,survey.model_survey_question,survey_extend.group_survey_psychologist,1,0,0,0
+access_res_company_psychologist,res.company.psychologist,base.model_res_company,survey_extend.group_survey_psychologist,1,0,0,0
+access_survey_user_input_line_psychologist,survey.user_input.line.psychologist,survey.model_survey_user_input_line,survey_extend.group_survey_psychologist,1,0,0,0

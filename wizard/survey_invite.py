@@ -14,7 +14,6 @@ class SurveyInvite(models.TransientModel):
     company_id = fields.Many2one(
         "res.company",
         string="Unidad de Negocio",
-        domain="[('id', 'in', allowed_company_ids)]"
     )
 
     allowed_company_ids = fields.Many2many(

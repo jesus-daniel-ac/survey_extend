@@ -33,27 +33,27 @@
                 <page string="Evaluación Psicológica"  invisible="not is_psychologist_survey">
                     <group>
                         <group string="Candidato">
-                            <field name="business_unit_id" groups="survey_extend.group_survey_psychologist"/>
-                            <field name="candidate_name" groups="survey_extend.group_survey_psychologist"/>
-                            <field name="candidate_age" groups="survey_extend.group_survey_psychologist"/>
+                            <field name="business_unit_id" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist"/>
+                            <field name="candidate_name" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist"/>
+                            <field name="candidate_age" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist"/>
                         </group>
                         <group string="Psicólogo evaluador">
-                            <field name="psychologist_user_id" groups="survey_extend.group_survey_psychologist"/>
-                            <field name="psychologist_license" groups="survey_extend.group_survey_psychologist"/>
-                            <field name="psychologist_signature" groups="survey_extend.group_survey_psychologist" widget="signature"/>
+                            <field name="psychologist_user_id" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist"/>
+                            <field name="psychologist_license" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist"/>
+                            <field name="psychologist_signature" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist" widget="signature"/>
                         </group>
                     </group>
                     <group>
                         <group string="Puntaje">
-                            <field name="points_assit" groups="survey_extend.group_survey_psychologist" readonly="1"/>
-                            <field name="points_ders" groups="survey_extend.group_survey_psychologist" readonly="1"/>
-                            <field name="points_plutchik" groups="survey_extend.group_survey_psychologist" readonly="1"/>
+                            <field name="points_assit" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist" readonly="1"/>
+                            <field name="points_ders" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist" readonly="1"/>
+                            <field name="points_plutchik" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist" readonly="1"/>
                         </group>
                         <group string="Resultados">
-                            <field name="risk_substance_use" groups="survey_extend.group_survey_psychologist"/>
-                            <field name="emotional_stability_summary" groups="survey_extend.group_survey_psychologist"/>
-                            <field name="evaluation_final_result" groups="survey_extend.group_survey_psychologist"/>
-                            <field name="recommendations" groups="survey_extend.group_survey_psychologist"/>
+                            <field name="risk_substance_use" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist"/>
+                            <field name="emotional_stability_summary" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist"/>
+                            <field name="evaluation_final_result" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist"/>
+                            <field name="recommendations" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist"/>
                         </group>
                     </group>
                 </page>

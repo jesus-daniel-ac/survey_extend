@@ -10,7 +10,7 @@
             .apto-title  { text-align:center; font-size:14pt; font-weight:700; margin: 4px 0 14px; }
             .apto-block  { margin: 10px 0 12px; text-align:justify; }
             .apto-bold   { font-weight:700; }
-            .apto-atten  { text-align:center; margin-top:22px; margin-bottom:8px; font-weight:700; }
+            .apto-atten  { text-align:center; margin-top:52px; margin-bottom:8px; font-weight:700; }
             .apto-sign   { text-align:center; margin-top:10px; }
             .apto-note   { font-size:10pt; font-weight:700; margin-top:22px; text-align:justify; }
             .apto-firma  { margin-top:12px; }
@@ -42,12 +42,12 @@
 
             <div class="apto-block">
               Riesgo 
-              <span class="apto-bold">
-                <t t-if="doc.risk_substance_use and doc.risk_substance_use.lower() == 'medium'">MEDIO</t>
-                <t t-elif="doc.risk_substance_use">
-                  <t t-esc="doc.risk_substance_use"/>
-                </t>
-              </span>
+             <span class="apto-bold">
+              <t t-if="doc.risk_substance_use == 'low'">BAJO</t>
+              <t t-elif="doc.risk_substance_use == 'medium'">MEDIO</t>
+              <t t-elif="doc.risk_substance_use == 'high'">ALTO</t>
+            </span>
+
               en consumo de sustancias y/o alcohol.
             </div>
 
@@ -74,6 +74,7 @@
             <!-- FIRMA -->
             <div class="apto-atten">ATENTAMENTE</div>
             <div class="apto-sign">
+              <span t-esc="doc.psychologist_user_id.name or ''"/><br/>
               <span t-esc="doc.psychologist_license or ''"/><br/>
               <div class="apto-firma">
                 <img t-if="doc.psychologist_signature" t-att-src="image_data_uri(doc.psychologist_signature)" style="max-height:80px;"/>

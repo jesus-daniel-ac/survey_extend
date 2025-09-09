@@ -13,18 +13,6 @@ class SurveyUserInput(models.Model):
         readonly=True
     )
 
-    # Candidato
-    business_unit_id = fields.Many2one(
-        "res.company", 
-        string="Unidad de Negocio"
-    )
-    candidate_name = fields.Char(
-        string="Nombre del evaluado"
-    )
-    candidate_age = fields.Integer(
-        string="Edad"
-    )
-
     # Psicólogo evaluador
     psychologist_user_id = fields.Many2one(
         "res.users",
@@ -65,6 +53,34 @@ class SurveyUserInput(models.Model):
     recommendations = fields.Text(
         string="Recomendaciones"
     )
+
+    # Candidato
+    business_unit_id = fields.Many2one(
+        "res.company", 
+        string="Unidad de Negocio"
+    )
+
+    candidate_name = fields.Char(string="Nombre del evaluado")
+    candidate_age = fields.Float(string="Edad")
+
+    def write(self, vals):
+        res = super().write(vals)
+        # Si el estado cambió (a cualquier valor)
+        if "state" in vals:
+            for record in self:
+                name, age = False, False
+                for line in record.user_input_line_ids:
+                    title = (line.question_id.sudo().title or "").lower()
+                    if "nombre" in title:
+                        name = line.value_char_box or line.value_text_box
+                    if "edad" in title:
+                        if getattr(line, "value_numerical_box", False):
+                            age = line.value_numerical_box
+                super(SurveyUserInput, record).write({
+                    "candidate_name": name,
+                    "candidate_age": age,
+                })
+        return res
 
 
     def _norm(self,text):

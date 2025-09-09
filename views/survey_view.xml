@@ -9,12 +9,12 @@
       <field name="domain">['&amp;', ('is_psychologist_survey','=',True), '|', ('psychologist_ids','in',[uid]), ('restrict_user_ids','in',[uid])]</field>
     </record>
 
-  <menuitem id="menu_psychologist_surveys"
-            name="Encuestas"
-            parent="survey.menu_surveys"
-            action="action_psychologist_surveys"
-            groups="survey_extend.group_survey_psychologist,survey.group_survey_user,base.group_system"
-            sequence="40"/>
+    <menuitem id="menu_psychologist_surveys"
+              name="Encuestas"
+              action="action_psychologist_surveys"
+              groups="survey_extend.group_survey_psychologist"
+              web_icon="survey,static/description/icon.png"
+              sequence="140"/>
 
 
         <record id="survey_survey_view_form_inherit_extend" model="ir.ui.view">

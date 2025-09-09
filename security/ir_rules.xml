@@ -1,20 +1,24 @@
 <odoo>
+    <!-- Survey Answers: sólo las asignadas al psicólogo -->
     <record id="survey_user_input_rule_psychologist_own" model="ir.rule">
-    <field name="name">Survey Answers: only my assignments</field>
-    <field name="model_id" ref="survey.model_survey_user_input"/>
-    <field name="domain_force">[('psychologist_user_id', '=', user.id)]</field>
-    <field name="groups" eval="[(4, ref('survey_extend.group_survey_psychologist'))]"/>
-    <field name="perm_read" eval="1"/>
-    <field name="perm_write" eval="1"/>  
-    <field name="perm_create" eval="0"/>
-    <field name="perm_unlink" eval="0"/>
+        <field name="name">Survey Answers: only my assignments</field>
+        <field name="model_id" ref="survey.model_survey_user_input"/>
+        <field name="domain_force">[('psychologist_user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('survey_extend.group_survey_psychologist'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
     </record>
 
+    <!-- Survey Invite -->
     <record id="survey_invite_survey_psychologist" model="ir.rule">
         <field name="name">Survey invite: psychologist</field>
         <field name="model_id" ref="survey.model_survey_invite"/>
-        <field name="domain_force">['|',  ('survey_id.restrict_user_ids', 'in', user.id),
-            ('survey_id.restrict_user_ids', '=', False)]</field>
+        <field name="domain_force">
+            ['|', ('survey_id.restrict_user_ids', 'in', user.id),
+                  ('survey_id.restrict_user_ids', '=', False)]
+        </field>
         <field name="groups" eval="[(4, ref('survey_extend.group_survey_psychologist'))]"/>
         <field name="perm_unlink" eval="0"/>
         <field name="perm_write" eval="1"/>
@@ -22,6 +26,7 @@
         <field name="perm_create" eval="1"/>
     </record>
 
+    <!-- Survey -->
     <record id="survey_survey_rule_psychologist" model="ir.rule">
         <field name="name">Survey: only assigned psychologists</field>
         <field name="model_id" ref="survey.model_survey_survey"/>
@@ -33,6 +38,7 @@
         <field name="perm_unlink" eval="0"/>
     </record>
 
+    <!-- Survey Question -->
     <record id="survey_question_rule_psychologist" model="ir.rule">
         <field name="name">Survey Question: only assigned surveys</field>
         <field name="model_id" ref="survey.model_survey_question"/>
@@ -44,6 +50,7 @@
         <field name="perm_unlink" eval="0"/>
     </record>
 
+    <!-- Survey Question Answer -->
     <record id="survey_question_answer_rule_psychologist" model="ir.rule">
         <field name="name">Survey Question Answer: only assigned surveys</field>
         <field name="model_id" ref="survey.model_survey_question_answer"/>
@@ -54,6 +61,27 @@
         <field name="perm_create" eval="0"/>
         <field name="perm_unlink" eval="0"/>
     </record>
+
+    <!-- Survey User Input Line -->
+    <record id="survey_user_input_line_rule_psychologist" model="ir.rule">
+        <field name="name">Survey Input Line: only assigned surveys</field>
+        <field name="model_id" ref="survey.model_survey_user_input_line"/>
+        <field name="groups" eval="[(4, ref('survey_extend.group_survey_psychologist'))]"/>
+        <field name="domain_force">[('user_input_id.psychologist_user_id','=',user.id)]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+    
+    <record id="res_company_rule_psychologist" model="ir.rule">
+        <field name="name">Company: psychologist can see allowed companies</field>
+        <field name="model_id" ref="base.model_res_company"/>
+        <field name="groups" eval="[(4, ref('survey_extend.group_survey_psychologist'))]"/>
+        <field name="domain_force">[('id', 'in', user.company_ids.ids)]</field>
+        <field name="perm_read" eval="1"/>
+    </record>
+
 
 
 </odoo>
