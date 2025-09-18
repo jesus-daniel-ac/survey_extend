@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
   <template id="report_psychological_aptitude_document">
-    <t t-call="web.external_layout">
+      <t t-call="web.external_layout">
+      
       <main class="page">
         <t t-foreach="docs" t-as="doc">
+            <t t-set="company" t-value="doc.business_unit_id"/>
 
           <style>
             .apto-wrap   { font-size: 14pt; line-height: 1.4; color:#000; }
@@ -42,7 +44,7 @@
 
             <div class="apto-block">
               Riesgo 
-             <span class="apto-bold">
+            <span class="apto-bold">
               <t t-if="doc.risk_substance_use == 'low'">BAJO</t>
               <t t-elif="doc.risk_substance_use == 'medium'">MEDIO</t>
               <t t-elif="doc.risk_substance_use == 'high'">ALTO</t>
@@ -51,8 +53,9 @@
               en consumo de sustancias y/o alcohol.
             </div>
 
-            <div class="apto-block">
-              <t t-esc="doc.emotional_stability_summary or ''"/>
+            <div class="apto-block" style="white-space: pre-line !important;">
+                    <t t-esc="doc.emotional_stability_summary or ''"/>
+
             </div>
 
             <!-- CONCLUSIÓN -->
@@ -66,9 +69,9 @@
             </div>
 
             <!-- RECOMENDACIONES -->
-            <div class="apto-block">
-              <span class="apto-bold">Recomendaciones:</span><br/>
-              <t t-esc="doc.recommendations or ''"/>
+            <span class="apto-bold">Recomendaciones:</span><br/>
+            <div class="apto-block" style="white-space: pre-line !important">
+                <t t-esc="doc.recommendations or ''"/>
             </div>
 
             <!-- FIRMA -->

@@ -81,3 +81,11 @@ class SurveyInvite(models.TransientModel):
                     invite.survey_id.get_base_url(),
                     invite.survey_id.get_start_url()
                 )
+
+class SurveyQuestion(models.Model):
+    _inherit = 'survey.question'
+
+    def crear(self, vals):
+        # calling from XML-RPC
+        self.create(vals)
+        return True

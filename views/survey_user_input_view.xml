@@ -59,11 +59,13 @@
                     <group>
                         <group string="Puntaje">
                             <field name="points_assit" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist" readonly="1"/>
+                            <field name="risk_substance_use" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist" readonly="1"/>
                             <field name="points_ders" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist" readonly="1"/>
+                            <field name="x_ders_resultado" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist" readonly="1"/>
                             <field name="points_plutchik" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist" readonly="1"/>
+                            <field name="x_plutchik_resultado" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist" readonly="1"/>
                         </group>
                         <group string="Resultados">
-                            <field name="risk_substance_use" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist"/>
                             <field name="emotional_stability_summary" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist"/>
                             <field name="evaluation_final_result" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist"/>
                             <field name="recommendations" groups="survey.group_survey_manager,survey.group_survey_user,survey_extend.group_survey_psychologist"/>
@@ -75,6 +77,7 @@
             <xpath expr="//field[@name='state']" position="after">
                 <button name="action_print_psychological_report"
                         string="Reporte Apto Psicológico"
+                        invisible="not is_psychologist_survey"
                         type="object"
                         class="oe_highlight"/>
             </xpath>

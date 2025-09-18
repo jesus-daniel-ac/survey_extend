@@ -30,6 +30,23 @@ class SurveyUserInput(models.Model):
     points_assit = fields.Float(string="Assist", compute="_compute_section_points")
     points_ders = fields.Float(string="Ders", compute="_compute_section_points")
     points_plutchik = fields.Float(string="Plutchik", compute="_compute_section_points")
+    x_ders_resultado = fields.Selection(
+        [
+            ('muy_bajo', 'Muy Bajo'),
+            ('bajo', 'Bajo'),
+            ('promedio', 'Promedio'),
+            ('alto', 'Alto'),
+            ('muy_alto', 'Muy Alto'),
+        ],
+        string="Nivel DERS"
+    )
+    x_plutchik_resultado = fields.Selection(
+        [
+            ('no_impulsivo', 'Sujeto no impulsivo'),
+            ('impulsivo', 'Sujeto impulsivo'),
+        ],
+        string="Resultado Plutchik"
+    )
 
     # Resultados
     risk_substance_use = fields.Selection(
