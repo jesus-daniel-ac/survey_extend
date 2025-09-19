@@ -42,6 +42,12 @@
         <field name="model">survey.user_input</field>
         <field name="inherit_id" ref="survey.survey_user_input_view_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//field[@name='skipped']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//field[@name='answer_is_correct']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
             <xpath expr="//form/sheet/notebook" position="inside">
                 <page string="Evaluación Psicológica"  invisible="not is_psychologist_survey">
                     <group>
